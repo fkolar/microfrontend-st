@@ -1,0 +1,27 @@
+{
+  "npmScope": "microfrontend-apps",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "microfrontend-apps": {
+      "tags": []
+    },
+    "microfrontend-apps-e2e": {
+      "tags": []
+    },
+    "common-req-app": {
+      "tags": []
+    },
+    "content-item-app": {
+      "tags": []
+    }
+  }
+}

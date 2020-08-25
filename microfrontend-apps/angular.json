@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "microfrontend-apps": {
       "projectType": "application",
@@ -10,25 +10,26 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/microfrontend-apps",
+      "sourceRoot": "apps/microfrontend-apps/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/microfrontend-apps",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/microfrontend-apps",
+            "index": "apps/microfrontend-apps/src/index.html",
+            "main": "apps/microfrontend-apps/src/main.ts",
+            "polyfills": "apps/microfrontend-apps/src/polyfills.ts",
+            "tsConfig": "apps/microfrontend-apps/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/microfrontend-apps/src/favicon.ico",
+              "apps/microfrontend-apps/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/fundamental-styles/dist/icon.css",
+              "apps/microfrontend-apps/src/styles.scss"
             ],
             "scripts": []
           },
@@ -36,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/microfrontend-apps/src/environments/environment.ts",
+                  "with": "apps/microfrontend-apps/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -83,17 +84,15 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/microfrontend-apps/src/test.ts",
+            "polyfills": "apps/microfrontend-apps/src/polyfills.ts",
+            "tsConfig": "apps/microfrontend-apps/tsconfig.spec.json",
+            "karmaConfig": "apps/microfrontend-apps/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/microfrontend-apps/src/favicon.ico",
+              "apps/microfrontend-apps/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/microfrontend-apps/src/styles.scss"],
             "scripts": []
           }
         },
@@ -101,19 +100,22 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/microfrontend-apps/tsconfig.app.json",
+              "apps/microfrontend-apps/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
-        },
+        }
+      }
+    },
+    "microfrontend-apps-e2e": {
+      "projectType": "application",
+      "root": "apps/microfrontend-apps-e2e",
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/microfrontend-apps-e2e/protractor.conf.js",
             "devServerTarget": "microfrontend-apps:serve"
           },
           "configurations": {
@@ -121,8 +123,114 @@
               "devServerTarget": "microfrontend-apps:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/microfrontend-apps-e2e/tsconfig.json",
+            "exclude": ["**/node_modules/**"]
+          }
         }
       }
-    }},
-  "defaultProject": "microfrontend-apps"
+    },
+    "common-req-app": {
+      "projectType": "library",
+      "root": "libs/common-req-app",
+      "sourceRoot": "libs/common-req-app/src",
+      "prefix": "microfrontend-apps",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/common-req-app/tsconfig.lib.json",
+            "project": "libs/common-req-app/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/common-req-app/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/common-req-app/tsconfig.lib.json",
+              "libs/common-req-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/common-req-app/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/common-req-app/src/test.ts",
+            "tsConfig": "libs/common-req-app/tsconfig.spec.json",
+            "karmaConfig": "libs/common-req-app/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "content-item-app": {
+      "projectType": "library",
+      "root": "libs/content-item-app",
+      "sourceRoot": "libs/content-item-app/src",
+      "prefix": "microfrontend-apps",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/content-item-app/tsconfig.lib.json",
+            "project": "libs/content-item-app/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/content-item-app/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/content-item-app/tsconfig.lib.json",
+              "libs/content-item-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/content-item-app/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/content-item-app/src/test.ts",
+            "tsConfig": "libs/content-item-app/tsconfig.spec.json",
+            "karmaConfig": "libs/content-item-app/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
+  "defaultProject": "microfrontend-apps",
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "karma",
+      "e2eTestRunner": "protractor"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "karma"
+    }
+  }
 }
