@@ -2,6 +2,8 @@
   "name": "microfrontend-apps",
   "version": "0.0.0",
   "scripts": {
+    "build:libs": " ng build common-req-app && ng build content-item-app",
+    "publish:libs": "cd dist/libs && npm login && cd common-req-app && npm publish --access public && cd ../content-item-app && npm publish --access public ",
     "ng": "nx",
     "start": "ng serve",
     "build": "ng build",
