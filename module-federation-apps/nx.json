@@ -1,0 +1,18 @@
+{
+  "npmScope": "module-federation-apps",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "common-req-app": {
+      "tags": []
+    }
+  }
+}
