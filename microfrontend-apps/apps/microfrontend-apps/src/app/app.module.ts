@@ -19,8 +19,8 @@ import { LandingComponent } from './landing/landing.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CommonReqAppModule,
-    IconModule,
     ContentItemAppModule,
+    IconModule,
     LinkModule,
     LayoutGridModule,
     LayoutPanelModule
