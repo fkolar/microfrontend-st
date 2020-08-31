@@ -12,10 +12,8 @@ export class HomeComponent implements OnInit {
   constructor(private lookupService: LookupService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.plugin = this.lookupService.lookup()[0];
-
-    console.log('this.plugin = ', this.plugin)
   }
 
 }

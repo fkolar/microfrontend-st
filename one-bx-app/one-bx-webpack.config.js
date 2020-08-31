@@ -22,7 +22,8 @@ module.exports = [
     },
     plugins: [
       new ModuleFederationPlugin({
-        remotes: {},
+        remotes: {
+        },
         shared: ["@angular/core", "@angular/common", "@angular/router", "@fundamental-ngx/core"]
       }),
       new AotPlugin({
