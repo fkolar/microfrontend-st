@@ -26,7 +26,8 @@ module.exports = [
         library: {type: "var", name: "mfe1"},
         filename: "remoteEntry.js",
         exposes: {
-          './Download': './apps/common-req-app/src/app/download.component.ts'
+          './Download': './apps/common-req-app/src/app/download.component.ts',
+          './CommonReq': require.resolve("@aribaui/common-req-app")
         },
         shared: ["@angular/core", "@angular/common", "@angular/router"]
       }),
