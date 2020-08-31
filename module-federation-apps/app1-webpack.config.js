@@ -22,8 +22,8 @@ module.exports = [
     },
     plugins: [
       new ModuleFederationPlugin({
-        name: "commonReqApp",
-        library: {type: "var", name: "commonReqApp"},
+        name: "mfe1",
+        library: {type: "var", name: "mfe1"},
         filename: "remoteEntry.js",
         exposes: {
           './Download': './apps/common-req-app/src/app/download.component.ts'

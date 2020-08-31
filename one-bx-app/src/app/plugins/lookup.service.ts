@@ -7,7 +7,7 @@ export class LookupService {
     return [
       {
         remoteEntry: 'http://localhost:3000/remoteEntry.js',
-        remoteName: 'commonReqApp',
+        remoteName: 'mfe1',
         exposedModule: './Download',
 
         displayName: 'Download',
