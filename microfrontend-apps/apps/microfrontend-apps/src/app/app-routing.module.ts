@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import {LandingComponent} from './landing/landing.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent }
+  {
+    path: '', component: LandingComponent,
+    loadChildren: () => import('@aribaui/common-req-app').then(m => m.PrListModule)
+  }
 ];
 
 @NgModule({

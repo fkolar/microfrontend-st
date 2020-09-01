@@ -32,6 +32,8 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
   await container.init(__webpack_share_scopes__.default);
   const factory = await container.get(exposedModule);
   const Module = factory();
+
+  console.log(Module)
   return Module as T;
 }
 
